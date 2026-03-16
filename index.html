@@ -1,49 +1,461 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CU MainWerk</title>
+  <meta name="description" content="CU MainWerk – Dienstleistungsunternehmen in Goldbach.">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    html {
+      scroll-behavior: smooth;
+    }
 
-<title>CU MainWerk</title>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f5f5;
+      color: #111;
+      line-height: 1.6;
+    }
 
-<style>
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
 
-body{
-font-family: Arial;
-margin:0;
-background:#f4f4f4;
-text-align:center;
-}
+    header {
+      background: #111;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
 
-header{
-background:#222;
-color:white;
-padding:40px;
-font-size:30px;
-}
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      gap: 20px;
+    }
 
-section{
-padding:40px;
-}
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
-</style>
+    .nav-logo {
+      height: 54px;
+      width: auto;
+      display: block;
+    }
 
+    .nav-title {
+      color: #fff;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #e5e5e5;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+      color: #fff;
+      padding: 70px 0 60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      color: #ddd;
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+      max-width: 620px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #fff;
+      color: #111;
+    }
+
+    .btn-primary:hover {
+      background: #ddd;
+    }
+
+    .btn-secondary {
+      border: 1px solid #888;
+      color: #fff;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .hero-image-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .hero-logo {
+      max-width: 100%;
+      height: auto;
+      max-height: 320px;
+      object-fit: contain;
+    }
+
+    section {
+      padding: 70px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .section-title h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .section-title p {
+      color: #555;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .contact-card,
+    .legal-box {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    }
+
+    .contact-card h3,
+    .legal-box h2,
+    .legal-box h3 {
+      margin-bottom: 12px;
+    }
+
+    .contact-card p,
+    .legal-box p {
+      margin-bottom: 10px;
+    }
+
+    .contact-card a,
+    .legal-box a {
+      color: #111;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    footer {
+      background: #111;
+      color: #ddd;
+      padding: 24px 0;
+      margin-top: 50px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .cards,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 12px;
+      }
+
+      .nav-logo {
+        height: 46px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-CU MainWerk
-</header>
+  <header>
+    <div class="container nav">
+      <div class="nav-left">
+       <img src="images/logo.png" alt="CU MainWerk Logo" class="nav-logo">
+        <div class="nav-title">CU MainWerk</div>
+      </div>
 
-<section>
+      <nav class="nav-links">
+        <a href="#start">Start</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#impressum">Impressum</a>
+        <a href="#datenschutz">Datenschutz</a>
+      </nav>
+    </div>
+  </header>
 
-<h2>Willkommen bei CU MainWerk</h2>
+  <main>
+    <section class="hero" id="start">
+      <div class="container hero-grid">
+        <div>
+          <h1>Dienstleistungen mit Qualität und Handschlag-Mentalität</h1>
+          <p>
+            CU MainWerk steht für saubere Arbeit, direkte Kommunikation und zuverlässige Umsetzung.
+            Wir begleiten private und gewerbliche Kunden mit praxisnahen Lösungen.
+          </p>
 
-<p>Unsere Website ist gerade im Aufbau.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#kontakt">Jetzt anfragen</a>
+            <a class="btn btn-secondary" href="#leistungen">Leistungen ansehen</a>
+          </div>
+        </div>
 
-</section>
+        <div class="hero-image-box">
+          <img src="logo-cu-mainwerk.png" alt="CU MainWerk" class="hero-logo">
+        </div>
+      </div>
+    </section>
+
+    <section id="leistungen">
+      <div class="container">
+        <div class="section-title">
+          <h2>Unsere Leistungen</h2>
+          <p>Beispiele für die Bereiche, in denen CU MainWerk tätig ist.</p>
+        </div>
+
+        <div class="cards">
+          <div class="card">
+            <h3>Montage</h3>
+            <p>Saubere und fachgerechte Montagearbeiten mit zuverlässiger Ausführung.</p>
+          </div>
+
+          <div class="card">
+            <h3>Service</h3>
+            <p>Schnelle Unterstützung, direkte Kommunikation und praxisnahe Lösungen.</p>
+          </div>
+
+          <div class="card">
+            <h3>Individuelle Projekte</h3>
+            <p>Passende Leistungen für private und gewerbliche Kunden nach Bedarf.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="container">
+        <div class="section-title">
+          <h2>Kontakt</h2>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Direkt kontaktieren</h3>
+            <p><strong>Telefon 1:</strong> <a href="tel:+491787569046">0178 7569046</a></p>
+            <p><strong>Telefon 2:</strong> <a href="tel:+4915565035448">0155 65035448</a></p>
+            <p><strong>E-Mail:</strong> <a href="mailto:mainwerkcu@gmail.com">mainwerkcu@gmail.com</a></p>
+            <p><strong>Standort:</strong> Goldbach, Bayern</p>
+          </div>
+
+          <div class="contact-card">
+            <h3>WhatsApp</h3>
+            <p>Für schnelle Anfragen kannst du uns direkt per WhatsApp kontaktieren.</p>
+            <p><a href="https://wa.me/4915565035448" target="_blank" rel="noopener">WhatsApp öffnen</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="impressum">
+      <div class="container">
+        <div class="legal-box">
+          <h2>Impressum</h2>
+
+          <p><strong>Demirel & Er GbR / CU MainWerk</strong></p>
+
+          <p>
+            Gesellschafter:<br>
+            Ufuk Er<br>
+            Can Demirel
+          </p>
+
+          <p>
+            Am Wingert 44<br>
+            63773 Goldbach<br>
+            Deutschland
+          </p>
+
+          <p><strong>E-Mail:</strong> <a href="mailto:mainwerkcu@gmail.com">mainwerkcu@gmail.com</a></p>
+
+          <p>
+            <strong>Verantwortlich für den Inhalt:</strong><br>
+            Demirel&Er GbR
+          </p>
+
+          <h3>Haftung für Inhalte</h3>
+          <p>
+            Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt.
+            Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte
+            können wir jedoch keine Gewähr übernehmen.
+          </p>
+
+          <h3>Haftung für Links</h3>
+          <p>
+            Unsere Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+            Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="datenschutz">
+      <div class="container">
+        <div class="legal-box">
+          <h2>Datenschutz</h2>
+
+          <p>
+            Der Schutz Ihrer persönlichen Daten ist uns wichtig. Diese Website verarbeitet personenbezogene Daten
+            nur im notwendigen Umfang.
+          </p>
+
+          <h3>Verantwortlicher</h3>
+          <p>
+            Demirel & Er GbR / CU MainWerk<br>
+            Am Wingert 44<br>
+            63773 Goldbach<br>
+            Deutschland<br>
+            E-Mail: <a href="mailto:mainwerkcu@gmail.com">mainwerkcu@gmail.com</a>
+          </p>
+
+          <h3>Kontaktaufnahme</h3>
+          <p>
+            Wenn Sie uns per E-Mail oder Telefon kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage gespeichert.
+            Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.
+          </p>
+
+          <h3>Server-Logfiles</h3>
+          <p>
+            Beim Besuch dieser Website speichert der Hosting-Anbieter automatisch Informationen in sogenannten Server-Logfiles,
+            die Ihr Browser übermittelt.
+          </p>
+
+          <h3>Ihre Rechte</h3>
+          <p>
+            Sie haben das Recht auf Auskunft, Berichtigung und Löschung Ihrer gespeicherten personenbezogenen Daten,
+            soweit keine gesetzliche Aufbewahrungspflicht besteht.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© 2026 CU MainWerk</div>
+      <div class="footer-links">
+        <a href="#impressum">Impressum</a>
+        <a href="#datenschutz">Datenschutz</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
