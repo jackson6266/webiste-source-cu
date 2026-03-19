@@ -831,3 +831,24 @@ footer{
     padding:68px 0;
   }
 }
+.seo {
+  padding: 60px 0 20px;
+}
+
+.seo h2 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+.seo p {
+  margin-bottom: 14px;
+  color: #444;
+  max-width: 900px;
+}
+
+@media (max-width: 560px) {
+  .seo {
+    padding: 48px 0 10px;
+  }
+}
