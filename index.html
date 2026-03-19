@@ -347,7 +347,7 @@
         <div class="section-title reveal">
           <h2>Kontakt & Anfrage</h2>
           <p>
-            Sie möchten ein Projekt besprechen? Nutzen Sie das Formular oder schreiben Sie uns direkt per E-Mail.
+            Sie möchten ein Projekt besprechen? Nutzen Sie das Anfrageformular oder schreiben Sie uns direkt per E-Mail.
           </p>
         </div>
 
@@ -378,31 +378,35 @@
 
             <div class="notice">
               Telefonnummern werden aktuell nicht öffentlich auf der Website angezeigt.
-              Kontaktanfragen sind bequem per E-Mail oder Formular möglich.
+              Kontaktanfragen sind bequem per Formular oder per E-Mail möglich.
             </div>
           </div>
 
           <div class="form-box reveal">
             <h3>Anfrageformular</h3>
             <p class="small-text">
-              Das Formular öffnet Ihr E-Mail-Programm mit den eingetragenen Informationen.
+              Senden Sie uns Ihre Anfrage direkt über die Website. Wir melden uns schnellstmöglich zurück.
             </p>
 
-            <form id="contactForm">
+            <form action="https://formsubmit.co/mainwerkcu@gmail.com" method="POST" class="contact-form">
+              <input type="hidden" name="_captcha" value="false">
+              <input type="hidden" name="_subject" value="Neue Anfrage über cu-mainwerk.de">
+              <input type="hidden" name="_template" value="table">
+
               <div class="form-grid">
                 <div>
                   <label for="name">Name</label>
-                  <input type="text" id="name" placeholder="Ihr Name">
+                  <input type="text" id="name" name="name" placeholder="Ihr Name" required>
                 </div>
 
                 <div>
                   <label for="email">E-Mail</label>
-                  <input type="email" id="email" placeholder="ihre@email.de">
+                  <input type="email" id="email" name="email" placeholder="ihre@email.de" required>
                 </div>
 
                 <div>
                   <label for="bereich">Bereich</label>
-                  <select id="bereich">
+                  <select id="bereich" name="bereich">
                     <option value="">Bitte wählen</option>
                     <option>Innenausbau</option>
                     <option>Trockenbau</option>
@@ -410,23 +414,29 @@
                     <option>Fenster / Türen / Tore</option>
                     <option>Kabel- / Leerrohrverlegung</option>
                     <option>Renovierung / Modernisierung</option>
+                    <option>Montagearbeiten</option>
                     <option>Sonstiges</option>
                   </select>
                 </div>
 
                 <div>
                   <label for="ort">Ort des Projekts</label>
-                  <input type="text" id="ort" placeholder="z. B. Goldbach">
+                  <input type="text" id="ort" name="ort" placeholder="z. B. Goldbach">
                 </div>
 
                 <div>
-                  <label for="nachricht">Nachricht</label>
-                  <textarea id="nachricht" placeholder="Beschreiben Sie Ihr Vorhaben"></textarea>
+                  <label for="telefon">Telefon (optional)</label>
+                  <input type="text" id="telefon" name="telefon" placeholder="optional">
+                </div>
+
+                <div>
+                  <label for="message">Nachricht</label>
+                  <textarea id="message" name="message" rows="6" placeholder="Beschreiben Sie Ihr Vorhaben" required></textarea>
                 </div>
               </div>
 
               <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Anfrage vorbereiten</button>
+                <button type="submit" class="btn btn-primary">Anfrage senden</button>
                 <a href="mailto:mainwerkcu@gmail.com" class="btn btn-secondary">Direkt E-Mail schreiben</a>
               </div>
             </form>
