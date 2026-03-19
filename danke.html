@@ -2,11 +2,141 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Vielen Dank</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vielen Dank | CU MainWerk</title>
+  <meta name="description" content="Vielen Dank für Ihre Anfrage bei CU MainWerk.">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .thankyou-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      background:
+        linear-gradient(135deg, rgba(16,20,24,0.96), rgba(28,36,48,0.94)),
+        radial-gradient(circle at top right, rgba(212,175,55,0.18), transparent 30%);
+    }
+
+    .thankyou-card {
+      width: min(720px, 100%);
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+      border: 1px solid #e5e7eb;
+    }
+
+    .thankyou-logo {
+      width: 170px;
+      max-width: 70%;
+      margin: 0 auto 22px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 8px;
+    }
+
+    .thankyou-card h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 14px;
+      color: #111827;
+    }
+
+    .thankyou-card p {
+      color: #4b5563;
+      margin-bottom: 12px;
+      font-size: 1.03rem;
+    }
+
+    .thankyou-countdown {
+      margin: 20px 0 26px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .thankyou-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .thankyou-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .thankyou-btn-primary {
+      background: linear-gradient(135deg, #d4af37, #f3d36b);
+      color: #1b1b1b;
+    }
+
+    .thankyou-btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(212,175,55,0.25);
+    }
+
+    .thankyou-btn-secondary {
+      background: #111827;
+      color: #fff;
+    }
+
+    .thankyou-btn-secondary:hover {
+      background: #0b1220;
+    }
+  </style>
 </head>
-<body style="font-family: Arial; text-align: center; padding: 50px;">
-  <h1>Vielen Dank für Ihre Anfrage!</h1>
-  <p>Wir melden uns schnellstmöglich bei Ihnen.</p>
-  <a href="https://cu-mainwerk.de">Zurück zur Startseite</a>
+<body>
+  <main class="thankyou-page">
+    <div class="thankyou-card">
+      <img src="images/logotp.png" alt="CU MainWerk Logo" class="thankyou-logo">
+
+      <h1>Vielen Dank für Ihre Anfrage!</h1>
+
+      <p>
+        Ihre Nachricht wurde erfolgreich übermittelt.
+      </p>
+
+      <p>
+        Wir melden uns schnellstmöglich bei Ihnen zurück.
+      </p>
+
+      <div class="thankyou-countdown">
+        Weiterleitung zur Startseite in <span id="countdown">8</span> Sekunden …
+      </div>
+
+      <div class="thankyou-actions">
+        <a href="https://cu-mainwerk.de" class="thankyou-btn thankyou-btn-primary">Zur Startseite</a>
+        <a href="mailto:mainwerkcu@gmail.com" class="thankyou-btn thankyou-btn-secondary">Direkt E-Mail schreiben</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let seconds = 8;
+    const countdownEl = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      seconds--;
+      if (countdownEl) {
+        countdownEl.textContent = seconds;
+      }
+
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = "https://cu-mainwerk.de";
+      }
+    }, 1000);
+  </script>
 </body>
 </html>
