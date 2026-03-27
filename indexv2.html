@@ -18,6 +18,32 @@
   <meta property="og:image" content="https://cu-mainwerk.de/images/logo-main.png">
 
   <link rel="stylesheet" href="style.css">
+    <!-- Google Analytics DSGVO -->
+<script>
+  let gaConsent = false;
+</script>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N915KNK197"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied'
+  });
+
+  function enableAnalytics() {
+    if (gaConsent) return;
+    gaConsent = true;
+
+    gtag('consent', 'update', {
+      'analytics_storage': 'granted'
+    });
+
+    gtag('js', new Date());
+    gtag('config', 'G-N915KNK197');
+  }
+</script>
 </head>
 <body>
   <header class="site-header">
