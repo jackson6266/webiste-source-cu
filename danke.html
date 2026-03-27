@@ -4,139 +4,146 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vielen Dank | CU MainWerk</title>
-  <meta name="description" content="Vielen Dank für Ihre Anfrage bei CU MainWerk.">
-  <link rel="icon" type="image/png" href="images/favicon.png">
-  <link rel="apple-touch-icon" href="images/favicon.png">
-  <link rel="stylesheet" href="style.css">
+
+  <!-- Google Analytics DSGVO -->
+  <script>
+    let gaConsent = false;
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N915KNK197"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied'
+    });
+
+    function enableAnalytics() {
+      if (gaConsent) return;
+      gaConsent = true;
+
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+
+      gtag('js', new Date());
+      gtag('config', 'G-N915KNK197');
+    }
+  </script>
+
   <style>
-    .thankyou-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      background:
-        linear-gradient(135deg, rgba(16,20,24,0.96), rgba(28,36,48,0.94)),
-        radial-gradient(circle at top right, rgba(212,175,55,0.18), transparent 30%);
-    }
-
-    .thankyou-card {
-      width: min(720px, 100%);
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 36px 28px;
-      text-align: center;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
-      border: 1px solid #e5e7eb;
-    }
-
-    .thankyou-logo {
-      width: 170px;
-      max-width: 70%;
-      margin: 0 auto 22px;
-      background: #fff;
-      border-radius: 16px;
-      padding: 8px;
-    }
-
-    .thankyou-card h1 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      margin-bottom: 14px;
-      color: #111827;
-    }
-
-    .thankyou-card p {
-      color: #4b5563;
-      margin-bottom: 12px;
-      font-size: 1.03rem;
-    }
-
-    .thankyou-countdown {
-      margin: 20px 0 26px;
-      font-weight: 700;
-      color: #111827;
-    }
-
-    .thankyou-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    .thankyou-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 22px;
-      border-radius: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: 0.2s ease;
-    }
-
-    .thankyou-btn-primary {
-      background: linear-gradient(135deg, #d4af37, #f3d36b);
-      color: #1b1b1b;
-    }
-
-    .thankyou-btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(212,175,55,0.25);
-    }
-
-    .thankyou-btn-secondary {
-      background: #111827;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
       color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
     }
 
-    .thankyou-btn-secondary:hover {
-      background: #0b1220;
+    .box {
+      max-width: 500px;
+      padding: 40px;
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #ddd;
     }
   </style>
 </head>
+
 <body>
-  <main class="thankyou-page">
-    <div class="thankyou-card">
-      <img src="images/logotp.png" alt="CU MainWerk Logo" class="thankyou-logo">
 
-      <h1>Vielen Dank für Ihre Anfrage!</h1>
+  <div class="box">
+    <!-- Logo -->
+    <img src="images/logo.png" alt="CU MainWerk Logo" class="logo">
 
-      <p>
-        Ihre Nachricht wurde erfolgreich übermittelt.
-      </p>
+    <h1>Vielen Dank für Ihre Anfrage!</h1>
 
-      <p>
-        Wir melden uns schnellstmöglich bei Ihnen zurück.
-      </p>
+    <p>
+      Wir haben Ihre Nachricht erhalten und melden uns schnellstmöglich bei Ihnen.
+    </p>
 
-      <div class="thankyou-countdown">
-        Weiterleitung zur Startseite in <span id="countdown">8</span> Sekunden …
-      </div>
+    <a href="/" class="btn">Zurück zur Startseite</a>
+  </div>
 
-      <div class="thankyou-actions">
-        <a href="https://cu-mainwerk.de" class="thankyou-btn thankyou-btn-primary">Zur Startseite</a>
-        <a href="mailto:mainwerkcu@gmail.com" class="thankyou-btn thankyou-btn-secondary">Direkt E-Mail schreiben</a>
-      </div>
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #111;
+  color: #fff;
+  padding: 15px;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  ">
+    <span>
+      Diese Website verwendet Cookies zur Analyse (Google Analytics).
+    </span>
+    <div>
+      <button onclick="acceptCookies()" style="margin-right:10px;padding:8px 12px;">Akzeptieren</button>
+      <button onclick="declineCookies()" style="padding:8px 12px;">Ablehnen</button>
     </div>
-  </main>
+  </div>
 
   <script>
-    let seconds = 8;
-    const countdownEl = document.getElementById("countdown");
+    function acceptCookies() {
+      localStorage.setItem("cookieConsent", "accepted");
+      document.getElementById("cookie-banner").style.display = "none";
+      enableAnalytics();
+    }
 
-    const timer = setInterval(() => {
-      seconds--;
-      if (countdownEl) {
-        countdownEl.textContent = seconds;
-      }
+    function declineCookies() {
+      localStorage.setItem("cookieConsent", "declined");
+      document.getElementById("cookie-banner").style.display = "none";
+    }
 
-      if (seconds <= 0) {
-        clearInterval(timer);
-        window.location.href = "https://cu-mainwerk.de";
+    window.onload = function() {
+      let consent = localStorage.getItem("cookieConsent");
+
+      if (consent === "accepted") {
+        document.getElementById("cookie-banner").style.display = "none";
+        enableAnalytics();
+      } else if (consent === "declined") {
+        document.getElementById("cookie-banner").style.display = "none";
       }
-    }, 1000);
+    };
   </script>
+
 </body>
 </html>
