@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vielen Dank | CU MainWerk</title>
+
+  <!-- Google Analytics DSGVO -->
+  <script>
+    let gaConsent = false;
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N915KNK197"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+
+    gtag('consent', 'default', {
+      'analytics_storage': 'denied'
+    });
+
+    function enableAnalytics() {
+      if (gaConsent) return;
+      gaConsent = true;
+
+      gtag('consent', 'update', {
+        'analytics_storage': 'granted'
+      });
+
+      gtag('js', new Date());
+      gtag('config', 'G-N915KNK197');
+    }
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .box {
+      max-width: 500px;
+      padding: 40px;
+    }
+
+    .logo {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: #fff;
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 4px;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <!-- Logo -->
+    <img src="images/logo.png" alt="CU MainWerk Logo" class="logo">
+
+    <h1>Vielen Dank für Ihre Anfrage!</h1>
+
+    <p>
+      Wir haben Ihre Nachricht erhalten und melden uns schnellstmöglich bei Ihnen.
+    </p>
+
+    <a href="/" class="btn">Zurück zur Startseite</a>
+  </div>
+
+  <!-- COOKIE BANNER -->
+  <div id="cookie-banner" style="
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #111;
+  color: #fff;
+  padding: 15px;
+  z-index: 9999;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  ">
+    <span>
+      Diese Website verwendet Cookies zur Analyse (Google Analytics).
+    </span>
+    <div>
+      <button onclick="acceptCookies()" style="margin-right:10px;padding:8px 12px;">Akzeptieren</button>
+      <button onclick="declineCookies()" style="padding:8px 12px;">Ablehnen</button>
+    </div>
+  </div>
+
+  <script>
+    function acceptCookies() {
+      localStorage.setItem("cookieConsent", "accepted");
+      document.getElementById("cookie-banner").style.display = "none";
+      enableAnalytics();
+    }
+
+    function declineCookies() {
+      localStorage.setItem("cookieConsent", "declined");
+      document.getElementById("cookie-banner").style.display = "none";
+    }
+
+    window.onload = function() {
+      let consent = localStorage.getItem("cookieConsent");
+
+      if (consent === "accepted") {
+        document.getElementById("cookie-banner").style.display = "none";
+        enableAnalytics();
+      } else if (consent === "declined") {
+        document.getElementById("cookie-banner").style.display = "none";
+      }
+    };
+  </script>
+
+</body>
+</html>
