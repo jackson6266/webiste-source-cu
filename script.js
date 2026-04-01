@@ -39,15 +39,30 @@ document.querySelectorAll("[data-before-after]").forEach(slider => {
   const range = slider.querySelector(".ba-range");
   const afterImage = slider.querySelector(".ba-image--after");
   const line = slider.querySelector(".ba-overlay-line");
+  const handle = slider.querySelector(".ba-handle");
+  const hint = slider.querySelector(".ba-hint");
 
   const updateSlider = (value) => {
     afterImage.style.clipPath = `inset(0 0 0 ${value}%)`;
     line.style.left = `${value}%`;
+
+    if (handle) {
+      handle.style.left = `${value}%`;
+    }
   };
 
   updateSlider(range.value);
 
   range.addEventListener("input", (e) => {
     updateSlider(e.target.value);
+
+    if (hint) {
+      hint.style.opacity = "0";
+      hint.style.transition = "opacity 0.25s ease";
+    }
+
+    if (handle) {
+      handle.style.animation = "none";
+    }
   });
 });
