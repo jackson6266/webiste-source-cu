@@ -457,7 +457,10 @@ code {
 
 .before-after-slider {
   position: relative;
-  aspect-ratio: 16 / 9;
+  width: 100%;
+  min-height: 520px;
+  height: 68vh;
+  max-height: 760px;
   border-radius: 22px;
   overflow: hidden;
   box-shadow: var(--shadow);
@@ -483,7 +486,7 @@ code {
   height: 100%;
   opacity: 0;
   cursor: ew-resize;
-  z-index: 4;
+  z-index: 6;
 }
 
 .ba-overlay-line {
@@ -492,16 +495,61 @@ code {
   bottom: 0;
   left: 50%;
   width: 3px;
-  background: rgba(255,255,255,0.95);
+  background: rgba(255,255,255,0.96);
   transform: translateX(-50%);
-  z-index: 3;
+  z-index: 4;
+  box-shadow: 0 0 10px rgba(255,255,255,0.18);
+}
+
+.ba-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 54px;
+  height: 54px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.98);
+  border: 2px solid #111;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.28);
+  pointer-events: none;
+  animation: baPulse 1.8s infinite ease-in-out;
+}
+
+.ba-handle::before {
+  content: "↔";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #111;
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.ba-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: rgba(17,17,17,0.78);
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  pointer-events: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
 }
 
 .ba-badge {
   position: absolute;
   top: 18px;
-  z-index: 3;
-  background: rgba(255,255,255,0.92);
+  z-index: 5;
+  background: rgba(255,255,255,0.94);
   color: #111;
   padding: 10px 14px;
   border-radius: 12px;
@@ -514,6 +562,46 @@ code {
 
 .ba-badge--right {
   right: 18px;
+}
+
+@keyframes baPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255,255,255,0.24), 0 10px 25px rgba(0,0,0,0.28);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(255,255,255,0), 0 10px 25px rgba(0,0,0,0.28);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 10px 25px rgba(0,0,0,0.28);
+  }
+}
+
+@media (max-width: 760px) {
+  .before-after-slider {
+    min-height: 340px;
+    height: 52vh;
+    max-height: 520px;
+  }
+
+  .ba-handle {
+    width: 46px;
+    height: 46px;
+  }
+
+  .ba-handle::before {
+    font-size: 16px;
+  }
+
+  .ba-badge {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .ba-hint {
+    bottom: 14px;
+    padding: 7px 12px;
+    font-size: 0.78rem;
+  }
 }
 
 .project-grid {
