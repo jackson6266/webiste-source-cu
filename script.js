@@ -102,3 +102,37 @@ window.addEventListener("load", function () {
     banner.style.display = "block";
   }
 });
+function acceptCookies() {
+  localStorage.setItem("cookieConsent", "accepted");
+  const banner = document.getElementById("cookie-banner");
+  if (banner) banner.style.display = "none";
+
+  if (typeof enableAnalytics === "function") {
+    enableAnalytics();
+  }
+}
+
+function declineCookies() {
+  localStorage.setItem("cookieConsent", "declined");
+  const banner = document.getElementById("cookie-banner");
+  if (banner) banner.style.display = "none";
+}
+
+window.addEventListener("load", function () {
+  const consent = localStorage.getItem("cookieConsent");
+  const banner = document.getElementById("cookie-banner");
+
+  if (!banner) return;
+
+  if (consent === "accepted") {
+    banner.style.display = "none";
+
+    if (typeof enableAnalytics === "function") {
+      enableAnalytics();
+    }
+  } else if (consent === "declined") {
+    banner.style.display = "none";
+  } else {
+    banner.style.display = "block";
+  }
+});
