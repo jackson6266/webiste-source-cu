@@ -68,8 +68,6 @@ document.querySelectorAll("[data-before-after]").forEach(slider => {
 });
 // 🔥 COOKIE SYSTEM FIXED
 
-let gaConsent = false;
-
 function acceptCookies() {
   localStorage.setItem("cookieConsent", "accepted");
 
