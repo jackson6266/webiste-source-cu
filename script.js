@@ -66,42 +66,6 @@ document.querySelectorAll("[data-before-after]").forEach(slider => {
     }
   });
 });
-// 🔥 COOKIE BANNER + ANALYTICS
-
-function acceptCookies() {
-  localStorage.setItem("cookieConsent", "accepted");
-  document.getElementById("cookie-banner").style.display = "none";
-
-  if (typeof enableAnalytics === "function") {
-    enableAnalytics();
-  }
-}
-
-function declineCookies() {
-  localStorage.setItem("cookieConsent", "declined");
-  document.getElementById("cookie-banner").style.display = "none";
-}
-
-window.addEventListener("load", function () {
-  const consent = localStorage.getItem("cookieConsent");
-  const banner = document.getElementById("cookie-banner");
-
-  if (!banner) return;
-
-  if (consent === "accepted") {
-    banner.style.display = "none";
-
-    if (typeof enableAnalytics === "function") {
-      enableAnalytics();
-    }
-
-  } else if (consent === "declined") {
-    banner.style.display = "none";
-
-  } else {
-    banner.style.display = "block";
-  }
-});
 // 🔥 COOKIE SYSTEM FIXED
 
 let gaConsent = false;
