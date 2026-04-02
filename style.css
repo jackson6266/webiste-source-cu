@@ -873,22 +873,53 @@ code {
 }
 .cookie-banner {
   position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-
-  width: min(92%, 520px);
-
-  background: #111;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(10,10,10,0.88);
   color: #fff;
-  padding: 20px;
-  border-radius: 16px;
-
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-
-  z-index: 999999; /* 🔥 EXTREM WICHTIG */
+  z-index: 999999;
+  display: none;
   pointer-events: auto;
 }
-.cookie-banner * {
-  pointer-events: auto;
+
+.cookie-banner p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.88);
+  max-width: 560px;
+  margin: 0 auto 20px;
+  text-align: center;
+}
+
+.cookie-banner a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.cookie-banner .cookie-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cookie-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cookie-banner > p,
+.cookie-banner > .cookie-buttons {
+  position: relative;
+  z-index: 2;
+}
+
+.cookie-banner {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
 }
