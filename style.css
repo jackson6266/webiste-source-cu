@@ -846,3 +846,28 @@ code {
     display: none;
   }
 }
+.privacy-check {
+  margin-top: 8px;
+}
+
+.privacy-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-soft);
+}
+
+.privacy-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  accent-color: #ffffff;
+  flex: 0 0 auto;
+}
+
+.privacy-label a {
+  color: var(--white);
+  text-decoration: underline;
+}
