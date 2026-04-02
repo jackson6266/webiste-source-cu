@@ -102,37 +102,43 @@ window.addEventListener("load", function () {
     banner.style.display = "block";
   }
 });
+// 🔥 COOKIE SYSTEM FIXED
+
+let gaConsent = false;
+
 function acceptCookies() {
   localStorage.setItem("cookieConsent", "accepted");
+
   const banner = document.getElementById("cookie-banner");
   if (banner) banner.style.display = "none";
 
-  if (typeof enableAnalytics === "function") {
+  if (!gaConsent && typeof enableAnalytics === "function") {
+    gaConsent = true;
     enableAnalytics();
   }
 }
 
 function declineCookies() {
   localStorage.setItem("cookieConsent", "declined");
+
   const banner = document.getElementById("cookie-banner");
   if (banner) banner.style.display = "none";
 }
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   const consent = localStorage.getItem("cookieConsent");
   const banner = document.getElementById("cookie-banner");
 
   if (!banner) return;
 
-  if (consent === "accepted") {
+  // 🔥 WICHTIG: NICHT direkt verstecken!
+  if (!consent) {
+    banner.style.display = "block";
+  } else {
     banner.style.display = "none";
 
-    if (typeof enableAnalytics === "function") {
+    if (consent === "accepted" && typeof enableAnalytics === "function") {
       enableAnalytics();
     }
-  } else if (consent === "declined") {
-    banner.style.display = "none";
-  } else {
-    banner.style.display = "block";
   }
 });
