@@ -871,3 +871,11 @@ code {
   color: var(--white);
   text-decoration: underline;
 }
+.cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 520px);
+  background: #111;
+ 
