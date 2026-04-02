@@ -23,11 +23,15 @@
   let gaConsent = false;
 </script>
 
+<!-- Google Tag (Consent Mode korrekt) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N915KNK197"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
 
+  let gaConsent = false;
+
+  // Standard: KEINE Cookies
   gtag('consent', 'default', {
     'analytics_storage': 'denied'
   });
@@ -422,15 +426,56 @@
       </div>
     </section>
 
-    <section class="section legal-section" id="impressum">
-      <div class="container legal-box reveal">
-        <h2>Impressum</h2>
-        <p><strong>Demirel & Er GbR / CU MainWerk</strong></p>
-        <p>Gesellschafter:<br>Ufuk Er<br>Zafer Can Demirel</p>
-        <p>E-Mail: <a href="mailto:mainwerkcu@gmail.com">mainwerkcu@gmail.com</a></p>
-        <p><strong>Verantwortlich für den Inhalt:</strong><br>Demirel & Er GbR</p>
-      </div>
-    </section>
+    <section id="impressum" class="section section-dark legal-section">
+  <div class="container">
+    <div class="legal-box">
+      <h2>Impressum</h2>
+
+      <h3>Angaben gemäß § 5 TMG</h3>
+      <p>
+        Demirel & Er GbR<br>
+        CU MainWerk<br>
+        Am Wingert 44<br>
+        63773 Goldbach
+      </p>
+
+      <h3>Vertreten durch</h3>
+      <p>
+        Zafer Can Demirel<br>
+        Ufuk Er
+      </p>
+
+      <h3>Kontakt</h3>
+      <p>
+        Telefon: 0178 7569046<br>
+        E-Mail: mainwerkcu@gmail.com
+      </p>
+
+      <h3>Umsatzsteuer-ID</h3>
+      <p>
+        Aktuell nicht vorhanden
+      </p>
+
+      <h3>Haftung für Inhalte</h3>
+      <p>
+        Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit,
+        Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.
+      </p>
+
+      <h3>Haftung für Links</h3>
+      <p>
+        Unsere Website enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben.
+        Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.
+      </p>
+
+      <h3>Urheberrecht</h3>
+      <p>
+        Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+      </p>
+
+    </div>
+  </div>
+</section>
 
     <section id="datenschutz" class="section section-dark legal-section">
   <div class="container">
