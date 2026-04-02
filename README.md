@@ -1,1 +1,1 @@
-# cumainwerk
+This is the source code repository.
