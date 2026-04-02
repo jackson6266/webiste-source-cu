@@ -95,7 +95,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
   // 🔥 WICHTIG: NICHT direkt verstecken!
   if (!consent) {
-    banner.style.display = "block";
+    banner.style.display = "flex";
   } else {
     banner.style.display = "none";
 
