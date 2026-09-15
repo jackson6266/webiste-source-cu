@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /v1/
-Disallow: /indexv2.html
 Sitemap: https://cu-mainwerk.de/sitemap.xml
