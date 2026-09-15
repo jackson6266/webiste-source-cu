@@ -59,3 +59,15 @@
 
 /* Direct navigation keeps long project galleries predictable. */
 html{scroll-behavior:auto}.lightbox{width:min(900px,94vw)}.lightbox>img{min-height:200px}
+/* Vector icons render consistently without platform emoji fonts. */
+.ui-icon{display:inline-block;width:1em;height:1em;vertical-align:-.12em;flex-shrink:0;color:inherit}
+.tiny-mark .ui-icon{width:30px;height:30px;vertical-align:middle}
+.corner-mark .ui-icon{width:30px;height:30px}
+.zoom-hint .ui-icon{width:19px;height:19px}
+.comparison-line .ui-icon,.comparison-control>.ui-icon{width:22px;height:22px}
+.comparison-control>span .ui-icon{width:20px;height:20px}
+.lightbox-close .ui-icon,.lightbox-navigation .ui-icon{width:22px;height:22px}
+.detail-icon .ui-icon,.faq-list summary>span .ui-icon{width:19px;height:19px}
+.thankyou-mark .ui-icon{width:28px;height:28px}
+.hero-bottom a .ui-icon,.footer-bottom a .ui-icon{width:18px;height:18px}
+.quiet-link>.ui-icon,.button>.ui-icon,.back-link>.ui-icon{width:18px;height:18px}
