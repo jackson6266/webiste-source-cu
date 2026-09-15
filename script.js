@@ -125,6 +125,7 @@
   const maxAge = 180 * 24 * 60 * 60 * 1000;
   let analyticsLoaded = false;
   let consentOpener;
+  let currentChoice = null;
   window[`ga-disable-${analyticsId}`] = true;
   function analytics(allowed) {
     window[`ga-disable-${analyticsId}`] = !allowed;
@@ -156,24 +157,56 @@
     document.head.append(script);
   }
   if (banner) {
-    let saved;
-    try { saved = JSON.parse(localStorage.getItem(storageKey)); } catch { /* Storage may be unavailable. */ }
-    const valid = saved && ['accepted', 'declined'].includes(saved.choice) && Number.isFinite(saved.at) && Date.now() >= saved.at && Date.now() - saved.at < maxAge;
-    banner.hidden = Boolean(valid);
-    analytics(valid && saved.choice === 'accepted');
+    const readChoice = raw => {
+      try {
+        const saved = JSON.parse(raw);
+        return saved && ['accepted', 'declined'].includes(saved.choice) && Number.isFinite(saved.at) && Date.now() >= saved.at && Date.now() - saved.at < maxAge ? saved.choice : null;
+      } catch { return null; }
+    };
+    const describeChoice = () => {
+      one('.cookie-status', banner).textContent = currentChoice === 'accepted' ? 'Aktuelle Auswahl: Statistik akzeptiert.' : currentChoice === 'declined' ? 'Aktuelle Auswahl: Nur notwendige Funktionen.' : '';
+      one('[data-cookie-close]', banner).hidden = !currentChoice;
+    };
+    const applyChoice = choice => {
+      currentChoice = choice;
+      analytics(choice === 'accepted');
+      banner.hidden = Boolean(choice);
+      describeChoice();
+      updateSticky();
+    };
+    let initialChoice = null;
+    try { initialChoice = readChoice(localStorage.getItem(storageKey)); } catch { /* Default to no optional tracking. */ }
+    applyChoice(initialChoice);
     all('[data-consent]').forEach(button => button.addEventListener('click', () => {
       try { localStorage.setItem(storageKey, JSON.stringify({choice: button.dataset.consent, at: Date.now()})); } catch { /* Choice still applies to this page. */ }
-      analytics(button.dataset.consent === 'accepted');
-      banner.hidden = true;
+      applyChoice(button.dataset.consent);
       consentOpener?.focus({preventScroll: true});
-      updateSticky();
     }));
     all('[data-cookie-settings]').forEach(button => button.addEventListener('click', () => {
       consentOpener = button;
+      describeChoice();
       banner.hidden = false;
       one('[data-consent]', banner).focus({preventScroll: true});
       updateSticky();
     }));
+    const closeSettings = () => {
+      if (!currentChoice) return;
+      banner.hidden = true;
+      consentOpener?.focus({preventScroll: true});
+      updateSticky();
+    };
+    one('[data-cookie-close]', banner).addEventListener('click', closeSettings);
+    banner.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && currentChoice) { event.preventDefault(); closeSettings(); }
+    });
+    // A withdrawal applies to other open pages on the same origin immediately.
+    addEventListener('storage', event => {
+      if (event.key === storageKey || event.key === null) applyChoice(readChoice(event.newValue));
+    });
+    addEventListener('pageshow', event => {
+      if (!event.persisted) return;
+      try { applyChoice(readChoice(localStorage.getItem(storageKey))); } catch { /* Keep the current page choice. */ }
+    });
   }
 
   const form = one('.contact-form');
