@@ -18,8 +18,44 @@
 @media print{.site-header,.cookie-banner,.mobile-contact,.filters,.form-panel,.lightbox,.footer-bottom button{display:none!important}body{background:white;color:black}.hero,.contact-section,.site-footer{background:white;color:black}.shell{width:100%}.section{padding:30px 0}.hero h1,.contact-copy h2 span,.hero-description,.contact-copy>p{color:black!important}.hero-grid{display:block}.hero-visual{height:350px;min-height:0}.comparison-grid{break-inside:avoid}.footer-top{padding:20px 0}}
 
 /* Readable supporting text and generous touch targets. */
+.comparison{aspect-ratio:3/4;max-height:650px}
+.comparison-control label{font-size:12px}.project-caption p{font-size:12px}.project-caption .quiet-link{margin-top:10px;min-height:44px}
+.gallery-intro{font-size:14px;color:var(--muted);margin:-8px 0 30px;max-width:640px}
+.gallery-head .eyebrow{color:var(--muted);margin-bottom:8px}
+.project-stories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;align-items:start}
+.project-story{background:var(--paper);border:1px solid #d4d6cc;min-width:0;scroll-margin-top:115px}
+.story-cover{position:relative;overflow:hidden;background:#d5d6cd}
+.story-cover-link{display:block;position:relative;aspect-ratio:5/4;overflow:hidden}
+.story-cover img{width:100%;height:100%;object-fit:cover;object-position:50% 53%;transition:transform .5s}
+.story-cover-link:hover img{transform:scale(1.025)}
+.story-count{position:absolute;top:18px;left:18px;padding:5px 11px;background:var(--paper);font-size:11px;pointer-events:none}
+.story-copy{padding:28px 30px 24px}.story-copy>.eyebrow{color:var(--muted);font-size:10px}
+.story-copy h3{font-size:clamp(23px,2.2vw,31px);letter-spacing:-.04em;line-height:1.25;margin:12px 0 16px}
+.story-copy>p:last-child{font-size:14px;color:var(--muted);line-height:1.85}
+.story-details{border-top:1px solid var(--line);margin:0 30px}
+.story-details>summary{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 0;cursor:pointer;font-size:13px;font-weight:700;list-style:none}
+.story-details>summary::-webkit-details-marker{display:none}
+.detail-icon{font-size:25px;font-weight:400;line-height:1}.story-details[open] .detail-icon{transform:rotate(45deg)}
+.story-frames{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px;padding:8px 0 30px}
+.story-frames figure{margin:0;min-width:0}.phase-photo{display:block;position:relative;background:var(--stone)}
+.phase-photo img{width:100%;height:auto;aspect-ratio:3/4;object-fit:contain}
+.story-frames figure:has(img[src*="planung"]){grid-column:1/-1}
+.story-frames figure:has(img[src*="planung"]) img{aspect-ratio:4/3}
+.story-frames figcaption{display:flex;gap:9px;align-items:baseline;margin-top:12px;line-height:1.6}
+.phase-number{font-size:10px;color:var(--muted)}.story-frames strong{font-size:12px;font-weight:750}
+.story-frames figcaption p{font-size:11px;color:var(--muted);margin-top:4px}
+.project-outro{margin-top:50px;border-top:1px solid #c4c9bb;padding-top:36px;display:flex;justify-content:space-between;gap:25px;align-items:center}
+.project-outro .eyebrow{color:var(--muted);margin-bottom:9px}.project-outro h3{font-size:28px;letter-spacing:-.04em}
+.lightbox-navigation{display:flex;justify-content:center;align-items:center;gap:24px;margin-top:15px;font-size:13px}
+.lightbox-navigation button{width:48px;height:44px;border:1px solid #737c6e;background:transparent;color:var(--paper);font-size:22px}
+.lightbox-navigation button:hover{background:#41473f}.lightbox>img{max-height:68dvh}
+@media(max-width:700px){.project-stories{grid-template-columns:1fr;gap:25px}.story-copy{padding:23px 22px}.story-copy h3{font-size:26px}.story-details{margin-inline:22px}.story-frames{gap:24px 13px}.story-frames figcaption p{font-size:12px}.story-cover-link{aspect-ratio:4/3}.project-outro{align-items:flex-start;flex-direction:column}.comparison{aspect-ratio:3/4}.hero-photo{object-position:50% 50%}.story-frames .zoom-hint{width:28px;height:28px;right:7px;bottom:7px}.project-caption h3{font-size:23px}}
+@media(prefers-reduced-motion:reduce){.story-cover-link:hover img{transform:none}}
 .privacy-check label,.form-status,.form-fineprint,.form-subtitle,.field-hint{font-size:12px}
 .cookie-banner p,.cookie-banner a,.cookie-banner .button-small{font-size:12px}
 .footer-links{font-size:13px}.footer-bottom{font-size:11px}
 .footer-links a,.footer-bottom a,.text-button{min-height:44px;display:inline-flex;align-items:center}
 @media(max-width:700px){.hero-description,.section-head>p,.service>p,.about-copy>p:not(.eyebrow),.process-grid p,.faq-list details p{font-size:14px}.footer-links{font-size:12px}.footer-bottom>div{column-gap:20px;row-gap:0}}
+
+/* Direct navigation keeps long project galleries predictable. */
+html{scroll-behavior:auto}.lightbox{width:min(900px,94vw)}.lightbox>img{min-height:200px}

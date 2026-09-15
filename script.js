@@ -68,19 +68,57 @@
   const dialog = one('.lightbox');
   if (dialog && typeof dialog.showModal === 'function') {
     let opener;
-    all('[data-lightbox]').forEach(link => link.addEventListener('click', event => {
-      event.preventDefault();
-      opener = link;
+    let pictures = [];
+    let position = 0;
+    function showPicture() {
+      const link = pictures[position];
       const img = one('img', dialog);
       img.src = link.href;
       img.alt = one('img', link).alt;
       one('p', dialog).textContent = link.dataset.caption;
+      one('[data-photo-position]', dialog).textContent = `${position + 1} / ${pictures.length}`;
+      one('.lightbox-navigation', dialog).hidden = pictures.length < 2;
+    }
+    function step(direction) {
+      position = (position + direction + pictures.length) % pictures.length;
+      showPicture();
+    }
+    all('[data-lightbox]').forEach(link => link.addEventListener('click', event => {
+      event.preventDefault();
+      opener = link;
+      const story = link.closest('.project-story');
+      const frames = story ? all('.story-frames [data-lightbox]', story) : [];
+      pictures = frames.length ? frames : [link];
+      position = Math.max(0, pictures.findIndex(picture => picture.href === link.href));
+      showPicture();
       dialog.showModal();
     }));
+    one('[data-photo-prev]', dialog)?.addEventListener('click', () => step(-1));
+    one('[data-photo-next]', dialog)?.addEventListener('click', () => step(1));
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+        event.preventDefault();
+        step(event.key === 'ArrowRight' ? 1 : -1);
+      }
+    });
     one('.lightbox-close', dialog).addEventListener('click', () => dialog.close());
-    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    let backdropPress = false;
+    dialog.addEventListener('pointerdown', event => {
+      const rect = dialog.getBoundingClientRect();
+      backdropPress = event.target === dialog && (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom);
+    });
+    dialog.addEventListener('click', event => {
+      if (backdropPress && event.target === dialog) dialog.close();
+      backdropPress = false;
+    });
     dialog.addEventListener('close', () => opener?.focus({preventScroll: true}));
   }
+
+  all('[data-open-project]').forEach(link => link.addEventListener('click', () => {
+    one('[data-filter="all"]')?.click();
+    const details = one(`#projekt-${link.dataset.openProject} details`);
+    if (details) details.open = true;
+  }));
 
   const analyticsId = 'G-N915KNK197';
   const storageKey = 'cu-mainwerk-consent-v1';
