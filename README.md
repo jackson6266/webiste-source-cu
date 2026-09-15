@@ -14,6 +14,10 @@ Statische Unternehmenswebsite von Demirel & Er GbR: https://cu-mainwerk.de
 - `assets/fonts/`: lokal eingebundene Schrift mit Lizenz.
 - `CNAME`, `robots.txt`, `sitemap.xml`: Domain und Suchmaschinen.
 
+## Projektansichten
+
+Die Startseite zeigt vier ausgewählte Projektmotive als pausierbare Slideshow. Automatische Wechsel stoppen bei reduzierter Bewegung, außerhalb des Sichtbereichs und in inaktiven Tabs. Vorher-Nachher-Bilder lassen sich direkt am mittleren Griff oder über den Regler darunter verschieben; Tastaturbedienung bleibt möglich.
+
 ## Cookies und Kontakt
 
 Google Analytics wird ausschließlich auf der Produktionsdomain und erst nach ausdrücklicher Zustimmung geladen. Die Auswahl wird für höchstens 180 Tage lokal gespeichert. Über „Cookie-Einstellungen“ im Seitenfuß lässt sie sich ändern; ein Widerruf gilt auch für andere geöffnete Seiten derselben Domain. Ohne Zustimmung bleiben optionale Statistiken deaktiviert.

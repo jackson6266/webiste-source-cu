@@ -43,15 +43,123 @@
   }));
   all('[data-comparison-range]').forEach(range => {
     const frame = one('[data-comparison]', range.closest('.comparison-card'));
+    const line = one('.comparison-line', frame);
+    const handle = one('span', line);
+    line.removeAttribute('aria-hidden');
+    handle.setAttribute('role', 'slider');
+    handle.setAttribute('tabindex', '0');
+    handle.setAttribute('aria-label', range.getAttribute('aria-label'));
+    handle.setAttribute('aria-valuemin', '0');
+    handle.setAttribute('aria-valuemax', '100');
+    handle.setAttribute('aria-orientation', 'horizontal');
+    handle.title = 'Ziehen oder mit den Pfeiltasten verschieben';
     const update = () => {
       frame.style.setProperty('--split', `${range.value}%`);
       range.setAttribute('aria-valuetext', `${range.value} Prozent Vorher-Bild`);
+      handle.setAttribute('aria-valuenow', range.value);
+      handle.setAttribute('aria-valuetext', range.getAttribute('aria-valuetext'));
       one('.label-before', frame).hidden = Number(range.value) < 15;
       one('.label-after', frame).hidden = Number(range.value) > 85;
     };
     range.addEventListener('input', update);
+    const move = event => {
+      const rect = frame.getBoundingClientRect();
+      range.value = Math.round(Math.max(0, Math.min(100, (event.clientX - rect.left) / rect.width * 100)));
+      update();
+    };
+    let pointer = null;
+    frame.addEventListener('pointerdown', event => {
+      if (!event.isPrimary || event.button !== 0) return;
+      pointer = event.pointerId;
+      frame.setPointerCapture(pointer);
+      handle.focus({preventScroll: true});
+      move(event);
+    });
+    frame.addEventListener('pointermove', event => {
+      if (event.pointerId === pointer) move(event);
+    });
+    const endDrag = event => {
+      if (event.pointerId !== pointer) return;
+      pointer = null;
+      if (frame.hasPointerCapture(event.pointerId)) frame.releasePointerCapture(event.pointerId);
+    };
+    frame.addEventListener('pointerup', endDrag);
+    frame.addEventListener('pointercancel', endDrag);
+    frame.addEventListener('lostpointercapture', () => { pointer = null; });
+    frame.addEventListener('dragstart', event => event.preventDefault());
+    handle.addEventListener('keydown', event => {
+      const keys = {ArrowLeft: -1, ArrowDown: -1, ArrowRight: 1, ArrowUp: 1, PageDown: -10, PageUp: 10};
+      if (!(event.key in keys) && !['Home', 'End'].includes(event.key)) return;
+      event.preventDefault();
+      range.value = event.key === 'Home' ? 0 : event.key === 'End' ? 100 : Number(range.value) + keys[event.key];
+      update();
+    });
     update();
   });
+  const slideshow = one('[data-slideshow]');
+  if (slideshow) {
+    const slides = all('.hero-slide', slideshow);
+    const dots = all('[data-slide]', slideshow);
+    const toggle = one('[data-slide-toggle]', slideshow);
+    const caption = one('[data-slide-caption]', slideshow);
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+    let paused = motion.matches;
+    let hovered = false;
+    let visible = true;
+    let timer;
+    let request = 0;
+    const load = slide => {
+      if (slide.dataset.src) {
+        slide.srcset = slide.dataset.srcset;
+        slide.src = slide.dataset.src;
+        delete slide.dataset.src;
+      }
+      return slide.decode().then(() => true).catch(() => false);
+    };
+    const schedule = () => {
+      clearTimeout(timer);
+      if (!paused && !hovered && visible && !document.hidden) timer = setTimeout(() => show(index + 1), 5500);
+    };
+    const syncToggle = () => {
+      toggle.setAttribute('aria-label', paused ? 'Slideshow abspielen' : 'Slideshow pausieren');
+      toggle.setAttribute('aria-pressed', String(!paused));
+      one('[data-play-icon]', toggle).hidden = !paused;
+      one('[data-pause-icon]', toggle).hidden = paused;
+    };
+    const show = async next => {
+      clearTimeout(timer);
+      const id = ++request;
+      next = (next + slides.length) % slides.length;
+      const loaded = await load(slides[next]);
+      if (id !== request) return;
+      if (loaded) {
+        index = next;
+        slides.forEach((slide, i) => { slide.classList.toggle('is-active', i === index); slide.setAttribute('aria-hidden', String(i !== index)); });
+        dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
+        caption.textContent = `${String(index + 1).padStart(2, '0')} / ${slides[index].dataset.title}`;
+        load(slides[(index + 1) % slides.length]);
+      }
+      schedule();
+    };
+    dots.forEach(dot => dot.addEventListener('click', () => show(Number(dot.dataset.slide))));
+    one('[data-slide-prev]', slideshow).addEventListener('click', () => show(index - 1));
+    one('[data-slide-next]', slideshow).addEventListener('click', () => show(index + 1));
+    toggle.addEventListener('click', () => { paused = !paused; syncToggle(); schedule(); });
+    slideshow.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') { hovered = true; schedule(); } });
+    slideshow.addEventListener('pointerleave', () => { hovered = false; schedule(); });
+    slideshow.addEventListener('focusin', event => {
+      if (event.target === toggle) return;
+      paused = true; syncToggle(); schedule();
+    });
+    document.addEventListener('visibilitychange', schedule);
+    motion.addEventListener('change', () => { paused = motion.matches; syncToggle(); schedule(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(entries => { visible = entries[0].isIntersecting; schedule(); }).observe(slideshow);
+    one('.slideshow-controls', slideshow).hidden = false;
+    syncToggle();
+    load(slides[1]);
+    schedule();
+  }
   const filters = one('.filters');
   if (filters) {
     filters.hidden = false;
