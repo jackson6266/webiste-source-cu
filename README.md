@@ -8,7 +8,7 @@ Statische Unternehmenswebsite von Demirel & Er GbR: https://cu-mainwerk.de
 - `danke.html`: Bestätigung nach dem Kontaktformular.
 - `impressum.html`, `datenschutz.html`, `404.html`: ergänzende Seiten.
 - `style.css`, `script.js`: gemeinsames Design und Interaktionen.
-- `images/projekte/`: 33 Projektfotos in je zwei WebP-Größen (560/1200 px).
+- `images/projekte/`: 43 Projektfotos in je zwei WebP-Varianten (bis 560/1200 px, ohne Hochskalierung).
 - `images/brand/`: verwendetes Logo.
 - `assets/icons/`, `favicon.ico`: CU-Favicon und Apple-Touch-Icon.
 - `assets/fonts/`: lokal eingebundene Schrift mit Lizenz.
