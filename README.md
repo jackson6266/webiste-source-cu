@@ -28,6 +28,15 @@ Das Kontaktformular verwendet FormSubmit mit Datenschutzhinweis, Pflichtfeldern 
 
 Kein Build-Schritt erforderlich. Zur Vorschau einen lokalen HTTP-Server im Repository starten, z. B. `python -m http.server 8766`.
 
+HTML, CSS und JavaScript sind mit zwei Leerzeichen eingerückt. HTML-Attribute stehen
+jeweils in einer eigenen Zeile. `.editorconfig` und `.prettierrc.json` halten diese
+Formatierung bei späteren Bearbeitungen einheitlich. Mit Prettier 3.6.2 lässt sie
+sich erneut anwenden:
+
+```sh
+npx prettier@3.6.2 --write "*.html" "*.css" "*.js" ".prettierrc.json"
+```
+
 GitHub Pages veröffentlicht den freigegebenen Stand von `main`. Vor dem Zusammenführen Änderungen mobil und am Desktop prüfen, Bildverweise kontrollieren und die Cookie-Auswahl testen. Danach den Pages-Lauf und die Live-Seite prüfen.
 
 Alte Versionen und ungenutzte Medien gehören nicht in den veröffentlichten Dateibaum; frühere Stände bleiben in der Git-Historie verfügbar.
